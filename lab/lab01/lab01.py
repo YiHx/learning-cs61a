@@ -26,7 +26,7 @@ def middle(a, b, c):
     >>> middle(30, 5, 40)
     30
     """
-    return ____
+    return a+b+c-min(a,b,c)-max(a,b,c)
 
 
 def falling(n, k):
