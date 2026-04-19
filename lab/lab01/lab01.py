@@ -73,7 +73,16 @@ def divisible_by_k(n, k):
     >>> c
     0
     """
-    "*** YOUR CODE HERE ***"
+    #"*** YOUR CODE HERE ***"
+    p=1
+    q=0
+    while p<=n:
+        if p%k==0:
+            print(p)
+            q+=1
+        p+=1
+    return q
+
 
 
 def sum_digits(y):
