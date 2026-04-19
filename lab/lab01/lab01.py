@@ -41,7 +41,16 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    "*** YOUR CODE HERE ***"
+    #"*** YOUR CODE HERE ***"
+    if k == 0:
+        return 1
+    p=1
+    while(k>0):
+        k-=1
+        p*=n
+        n-=1
+    return p
+        
 
 
 def divisible_by_k(n, k):
