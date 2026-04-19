@@ -65,7 +65,18 @@ def largest_factor(n):
     >>> largest_factor(13) # factor is 1 since 13 is prime
     1
     """
-    "*** YOUR CODE HERE ***"
+    #"*** YOUR CODE HERE ***"
+    q=1
+    p=-1
+    while q<n:
+        
+        if(n%q==0):
+            if(q>=p):
+                p=q
+        q+=1
+    return p
+        
+
 
 
 def hailstone(n):
