@@ -63,7 +63,12 @@ def accumulate(fuse, start, n, term):
     >>> accumulate(lambda x, y: x + y + 1, 2, 3, square)
     19
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    m=1
+    while m<=n:
+        start=fuse(start,term(m))
+        m+=1
+    return start
 
 
 def summation_using_accumulate(n, term):
