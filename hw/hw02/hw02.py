@@ -114,5 +114,14 @@ def make_repeater(f, n):
     >>> make_repeater(square, 3)(5) # square(square(square(5)))
     390625
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    def function(begin):
+        m=1
+        
+        while m<=n:
+            begin=f(begin)
+            m+=1
+        return begin
+    return function
+
 
