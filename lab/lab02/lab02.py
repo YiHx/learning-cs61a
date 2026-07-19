@@ -13,7 +13,10 @@ def composite_identity(f, g):
     >>> b1(4)                            # (4 + 1) ** 2 != 4 ** 2 + 1
     False
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    def checkout (a):
+        return f(g(a))==g(f(a))
+    return checkout
 
 
 def sum_digits(y):
