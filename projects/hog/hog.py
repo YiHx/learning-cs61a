@@ -106,6 +106,13 @@ def num_factors(n):
     # END PROBLEM 4
 
 
+def sus_points(score):
+    """Return the new score of a player taking into account the Sus Fuss rule."""
+    # BEGIN PROBLEM 4
+    "*** YOUR CODE HERE ***"
+    # END PROBLEM 4
+
+    
 def sus_update(num_rolls, player_score, opponent_score, dice=six_sided):
     """Return the total score of a player who starts their turn with
     PLAYER_SCORE and then rolls NUM_ROLLS DICE, *including* Sus Fuss.
