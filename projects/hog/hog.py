@@ -182,7 +182,7 @@ def play(strategy0, strategy1, update,
         if who==1:
             step=strategy1(score1,score0)
             score1=update(step,score1,score0,dice)
-        who = 1 - who
+        who=1-who
 
     # END PROBLEM 5
     return score0, score1
