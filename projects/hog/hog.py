@@ -208,7 +208,10 @@ def always_roll(n):
     """
     assert n >= 0 and n <= 10
     # BEGIN PROBLEM 6
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    def function(score,opponent_score):
+        return n
+    return function
     # END PROBLEM 6
 
 
