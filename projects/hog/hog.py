@@ -270,7 +270,17 @@ def make_averaged(original_function, times_called=1000):
     3.0
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    def function(*args):
+        cnt=0
+        ans=0
+        while cnt<=times_called:
+            ans+=original_function(*args)
+            cnt+=1
+        last_ans=ans/cnt
+        return last_ans
+    return function
+
     # END PROBLEM 8
 
 
