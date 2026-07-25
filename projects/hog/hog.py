@@ -274,7 +274,7 @@ def make_averaged(original_function, times_called=1000):
     def function(*args):
         cnt=0
         ans=0
-        while cnt<=times_called:
+        while cnt<times_called:
             ans+=original_function(*args)
             cnt+=1
         last_ans=ans/cnt
