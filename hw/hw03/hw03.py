@@ -131,7 +131,30 @@ def count_dollars(total):
     >>> check(HW_SOURCE_FILE, 'count_dollars', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    
+    def count(n, bill):
+        
+            if n == 0:
+                return 1
+        
+            elif n < 0:
+                return 0
+       
+            elif bill is None:
+                return 0
+            
+       
+            use_bill = count(n - bill, bill)
+        
+       
+            skip_bill = count(n, next_larger_dollar(bill))
+        
+       
+            return use_bill + skip_bill
+
+   
+    return count(total, 1)
 
 
 def next_larger_dollar(bill):
