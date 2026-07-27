@@ -7,7 +7,7 @@ def divide(quotients, divisors):
     >>> divide(range(1, 5), range(20, 25))
     {1: [20, 21, 22, 23, 24], 2: [20, 22, 24], 3: [21, 24], 4: [20, 24]}
     """
-    return {____: ____ for ____ in ____}
+    return {quotients[i]: [divisors[j] for j in range(len(divisors)) if divisors[j]%quotients[i]==0] for i in range(len(quotients))}
 
 
 def buy(fruits_to_buy, prices, total_amount):
