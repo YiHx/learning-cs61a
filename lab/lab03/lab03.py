@@ -94,7 +94,14 @@ def double_eights(n):
     >>> check(LAB_SOURCE_FILE, 'double_eights', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    if n<10:
+        return False
+    curr=n%100
+    if curr//10==curr%10==8:
+        return True
+    else:
+        return double_eights(n//10)
 
 
 def make_onion(f, g):
