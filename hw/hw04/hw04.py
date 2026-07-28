@@ -12,7 +12,21 @@ def shuffle(s):
     ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
     """
     assert len(s) % 2 == 0, 'len(seq) must be even'
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    s0=s[:len(s)//2]
+    s1=s[len(s)//2:]
+    s_0=iter(s0)
+    s_1=iter(s1)
+    ans=[1,]
+    for i in range(len(s)):
+        if (i+1)%2!=0:
+            ans.append(next(s_0))
+        else:
+            ans.append(next(s_1))
+    return ans[1:]
+    
+
+    
 
 
 def deep_map(f, s):
