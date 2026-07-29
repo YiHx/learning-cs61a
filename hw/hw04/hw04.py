@@ -124,7 +124,14 @@ def balanced(m):
     >>> check(HW_SOURCE_FILE, 'balanced', ['Index'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    if is_planet(m):
+        return True
+    left_arm = left(m)
+    right_arm = right(m)
+    left_torque = length(left_arm) * total_mass(end(left_arm))
+    right_torque = length(right_arm) * total_mass(end(right_arm))
+    return (left_torque == right_torque) and balanced(end(left_arm)) and balanced(end(right_arm))
 
 
 def berry_finder(t):
