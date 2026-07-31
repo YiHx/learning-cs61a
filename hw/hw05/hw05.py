@@ -77,6 +77,9 @@ def stair_ways(n):
             yield [2] + way
 
 
+n=1
+
+
 def yield_paths(t, value):
     """
     Yields all possible paths from the root of t to a node with the label
