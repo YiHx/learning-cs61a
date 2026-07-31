@@ -191,9 +191,13 @@ def autocorrect(typed_word, word_list, diff_function, limit):
     >>> autocorrect("tosting", ["testing", "asking", "fasting"], first_diff, 10)
     'testing'
     """
-    # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
-    # END PROBLEM 5
+    if typed_word in word_list:
+        return typed_word
+    closest_word = min(word_list, key=lambda word: diff_function(typed_word, word, limit))
+    if diff_function(typed_word, closest_word, limit) > limit:
+        return typed_word
+    else:
+        return closest_word
 
 
 def furry_fixes(typed, source, limit):
