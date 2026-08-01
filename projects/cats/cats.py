@@ -135,36 +135,36 @@ def wpm(typed, elapsed):
     # END PROBLEM 4
 
 
-################
-# Phase 4 (EC) #
-################
+# ################
+# # Phase 4 (EC) #
+# ################
 
 
-def memo(f):
-    """A general memoization decorator."""
-    cache = {}
+# def memo(f):
+#     """A general memoization decorator."""
+#     cache = {}
 
-    def memoized(*args):
-        immutable_args = deep_convert_to_tuple(args)  # convert *args into a tuple representation
-        if immutable_args not in cache:
-            result = f(*immutable_args)
-            cache[immutable_args] = result
-            return result
-        return cache[immutable_args]
+#     def memoized(*args):
+#         immutable_args = deep_convert_to_tuple(args)  # convert *args into a tuple representation
+#         if immutable_args not in cache:
+#             result = f(*immutable_args)
+#             cache[immutable_args] = result
+#             return result
+#         return cache[immutable_args]
 
-    return memoized
+#     return memoized
 
 
-def memo_diff(diff_function):
-    """A memoization function."""
-    cache = {}
+# def memo_diff(diff_function):
+#     """A memoization function."""
+#     cache = {}
 
-    def memoized(typed, source, limit):
-        # BEGIN PROBLEM EC
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM EC
+#     def memoized(typed, source, limit):
+#         # BEGIN PROBLEM EC
+#         "*** YOUR CODE HERE ***"
+#         # END PROBLEM EC
 
-    return memoized
+#     return memoized
 
 
 ###########
