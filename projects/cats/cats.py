@@ -255,22 +255,19 @@ def minimum_mewtations(typed, source, limit):
     3
     """
     # assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
-    # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+    if abs(len(typed) - len(source)) > limit: 
+        return limit + 1
+    if typed == "" or source == "":
+        return len(typed) + len(source)
+        
+    if typed[0] == source[0]: 
+        return minimum_mewtations(typed[1:], source[1:], limit)
     else:
-        add = ... # Fill in these lines
-        remove = ...
-        substitute = ...
-        # BEGIN
-        "*** YOUR CODE HERE ***"
-        # END
+        add = 1 + minimum_mewtations(typed, source[1:], limit - 1)
+        remove = 1 + minimum_mewtations(typed[1:], source, limit - 1)
+        substitute = 1 + minimum_mewtations(typed[1:], source[1:], limit - 1)
+        
+        return min(add, remove, substitute)
 
 
 # Ignore the line below
@@ -315,7 +312,17 @@ def report_progress(typed, source, user_id, upload):
     0.2
     """
     # BEGIN PROBLEM 8
-    "*** YOUR CODE HERE ***"
+    # "*** YOUR CODE HERE ***"
+    zipp=zip(typed,source)
+    ans =0
+    for x,y in zipp:
+        if x!=y:
+            break
+        else:
+            ans+=1
+    out=ans/len(source)
+    upload({'id':user_id,'progress':out})
+    return out
     # END PROBLEM 8
 
 
@@ -339,7 +346,9 @@ def time_per_word(words, timestamps_per_player):
     """
     tpp = timestamps_per_player  # A shorter name (for convenience)
     # BEGIN PROBLEM 9
-    times = []  # You may remove this line
+    times = []
+    times = [[p[i] - p[i-1] for i in range(1, len(p))] for p in tpp]
+    
     # END PROBLEM 9
     return {'words': words, 'times': times}
 
@@ -366,7 +375,8 @@ def fastest_words(words_and_times):
     player_indices = range(len(times))  # contains an *index* for each player
     word_indices = range(len(words))    # contains an *index* for each word
     # BEGIN PROBLEM 10
-    "*** YOUR CODE HERE ***"
+    # return [[words[i] for i in range(len(words)) if min(times)]]
+    return [[words[w] for w in word_indices if p == min(player_indices, key=lambda i: times[i][w])] for p in player_indices]
     # END PROBLEM 10
 
 
