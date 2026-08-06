@@ -49,14 +49,20 @@ class VendingMachine:
     """
     def __init__(self, product, price):
         """Set the product and its price, as well as other instance attributes."""
-        "*** YOUR CODE HERE ***"
+        # "*** YOUR CODE HERE ***"
+        self.product=product
+        self.price=price
+        self.stock=0
+        self.balance = 0
 
     def restock(self, n):
         """Add n to the stock and return a message about the updated stock level.
 
         E.g., Current candy stock: 3
         """
-        "*** YOUR CODE HERE ***"
+        # "*** YOUR CODE HERE ***"
+        self.stock+=n
+        return f'Current {self.product} stock: {self.stock}'
 
     def add_funds(self, n):
         """If the machine is out of stock, return a message informing the user to restock
@@ -68,7 +74,10 @@ class VendingMachine:
 
         E.g., Current balance: $4
         """
-        "*** YOUR CODE HERE ***"
+        if self.stock == 0:
+            return f'Nothing left to vend. Please restock. Here is your ${n}.'
+        self.balance += n
+        return f'Current balance: ${self.balance}'
 
     def vend(self):
         """Dispense the product if there is sufficient stock and funds and
@@ -81,7 +90,19 @@ class VendingMachine:
         E.g., Nothing left to vend. Please restock.
               Please add $3 more funds.
         """
-        "*** YOUR CODE HERE ***"
+        if self.stock == 0:
+            return 'Nothing left to vend. Please restock.'
+        if self.balance < self.price:
+            return f'Please add ${self.price - self.balance} more funds.'
+        change = self.balance - self.price
+        self.stock -= 1
+        self.balance = 0 
+        
+        if change > 0:
+            return f'Here is your {self.product} and ${change} change.'
+        else:
+            return f'Here is your {self.product}.'
+    
 
 
 def store_digits(n):
@@ -103,7 +124,12 @@ def store_digits(n):
     >>> cleaned = re.sub(r"#.*\\n", '', re.sub(r'"{3}[\s\S]*?"{3}', '', inspect.getsource(store_digits)))
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
-    "*** YOUR CODE HERE ***"
+    result = Link.empty
+    while n > 0:
+        last_digit = n % 10
+        result = Link(last_digit, result) 
+        n = n // 10
+    return result
 
 
 def deep_map_mut(func, s):
@@ -125,28 +151,33 @@ def deep_map_mut(func, s):
     >>> print(link1)
     <9 <16> 25 36>
     """
-    "*** YOUR CODE HERE ***"
+    if isinstance(s.first, Link):
+        deep_map_mut(func, s.first) 
+    else:
+        s.first = func(s.first) 
+    if s.rest is not Link.empty:
+        deep_map_mut(func, s.rest)
 
 
-def two_list(vals, counts):
-    """
-    Returns a linked list according to the two lists that were passed in. Assume
-    vals and counts are the same size. Elements in vals represent the value, and the
-    corresponding element in counts represents the number of this value desired in the
-    final linked list. Assume all elements in counts are greater than 0. Assume both
-    lists have at least one element.
-    >>> a = [1, 3]
-    >>> b = [1, 1]
-    >>> c = two_list(a, b)
-    >>> c
-    Link(1, Link(3))
-    >>> a = [1, 3, 2]
-    >>> b = [2, 2, 1]
-    >>> c = two_list(a, b)
-    >>> c
-    Link(1, Link(1, Link(3, Link(3, Link(2)))))
-    """
-    "*** YOUR CODE HERE ***"
+# def two_list(vals, counts):
+#     """
+#     Returns a linked list according to the two lists that were passed in. Assume
+#     vals and counts are the same size. Elements in vals represent the value, and the
+#     corresponding element in counts represents the number of this value desired in the
+#     final linked list. Assume all elements in counts are greater than 0. Assume both
+#     lists have at least one element.
+#     >>> a = [1, 3]
+#     >>> b = [1, 1]
+#     >>> c = two_list(a, b)
+#     >>> c
+#     Link(1, Link(3))
+#     >>> a = [1, 3, 2]
+#     >>> b = [2, 2, 1]
+#     >>> c = two_list(a, b)
+#     >>> c
+#     Link(1, Link(1, Link(3, Link(3, Link(2)))))
+#     """
+#     "*** YOUR CODE HERE ***"
 
 
 class Link:
