@@ -101,7 +101,12 @@ def without(s, i):
     >>> without(s, 4) is not s  # Make sure a copy is created
     True
     """
-    "*** YOUR CODE HERE ***"
+    if s is Link.empty:
+        return s
+    if i == 0:
+        return s.rest
+    else:
+        return Link(s.first, without(s.rest, i-1))
 
 
 def duplicate_link(s, val):
@@ -120,7 +125,14 @@ def duplicate_link(s, val):
     >>> z
     Link(1, Link(2, Link(2, Link(2, Link(2, Link(3))))))
     """
-    "*** YOUR CODE HERE ***"
+    if s is Link.empty:
+        return
+    elif s.first == val:
+        remaining = s.rest
+        s.rest = Link(val, remaining)
+        duplicate_link(remaining, val)
+    else:
+        duplicate_link(s.rest, val)
 
 
 class Link:
