@@ -50,6 +50,7 @@ class Insect:
     next_id = 0  # Every insect gets a unique id number
     damage = 0
     # ADD CLASS ATTRIBUTES HERE
+    is_waterproof = False
 
     def __init__(self, health, place=None):
         """Create an Insect with a health amount and a starting PLACE."""
@@ -101,6 +102,7 @@ class Ant(Insect):
 
     def __init__(self, health=1):
         super().__init__(health)
+        self.is_buffed=False
 
     def can_contain(self, other):
         return False
@@ -139,6 +141,9 @@ class Ant(Insect):
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
         # END Problem 12
+        if  not self.is_buffed:
+            self.damage=self.damage+self.damage
+            self.is_buffed=True
 
 
 class HarvesterAnt(Ant):
@@ -165,8 +170,8 @@ class ThrowerAnt(Ant):
     damage = 1
     food_cost=3
     initial_health=1
-    min_range = 0
-    max_range = float('inf')
+    lower_bound = 0
+    upper_bound = float('inf')
 
     def nearest_bee(self):
         """Return the nearest Bee in a Place (that is not the hive) connected to
@@ -177,7 +182,7 @@ class ThrowerAnt(Ant):
         current_place = self.place
         dist = 0
         while current_place is not None and not current_place.is_hive:
-            if len(current_place.bees) > 0 and self.min_range <= dist <= self.max_range:
+            if len(current_place.bees) > 0 and self.lower_bound <= dist <= self.upper_bound:
                 return random_bee(current_place.bees)
             current_place = current_place.entrance
             dist += 1
@@ -217,7 +222,7 @@ class ShortThrower(ThrowerAnt):
     # END Problem 4
     food_cost=2
     initial_health=1
-    max_range = 3
+    upper_bound = 3
 
 
 class LongThrower(ThrowerAnt):
@@ -231,7 +236,7 @@ class LongThrower(ThrowerAnt):
     # END Problem 4
     food_cost=2
     initial_health=1
-    min_range = 5
+    lower_bound = 5
 
 class FireAnt(Ant):
     """FireAnt cooks any Bee in its Place when it expires."""
@@ -389,10 +394,22 @@ class Water(Place):
         # BEGIN Problem 10
         "*** YOUR CODE HERE ***"
         # END Problem 10
+        super().add_insect(insect)
+        if not insect.is_waterproof:
+            insect.reduce_health(insect.health)
 
 # BEGIN Problem 11
 # The ScubaThrower class
 # END Problem 11
+class ScubaThrower(ThrowerAnt):
+    name = 'Scuba'
+    implemented = True
+    food_cost = 6
+    is_waterproof = True
+
+    def __init__(self,health=1):
+        super().__init__(health)
+
 
 
 class QueenAnt(ThrowerAnt):
@@ -402,8 +419,11 @@ class QueenAnt(ThrowerAnt):
     food_cost = 7
     # OVERRIDE CLASS ATTRIBUTES HERE
     # BEGIN Problem 12
-    implemented = False   # Change to True to view in the GUI
+    implemented = True  # Change to True to view in the GUI
     # END Problem 12
+
+    def __init__(self, health=1):
+        super().__init__(health)
 
     def action(self, gamestate):
         """A queen ant throws a leaf, but also doubles the damage of ants
@@ -412,6 +432,19 @@ class QueenAnt(ThrowerAnt):
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
         # END Problem 12
+        super().action(gamestate)
+
+        current_place = self.place.exit
+        while current_place is not None:
+            if current_place.ant is not None:
+                current_place.ant.double()
+                
+            
+                if current_place.ant.is_container and current_place.ant.ant_contained is not None:
+                    current_place.ant.ant_contained.double()
+            
+            current_place = current_place.exit
+
 
     def reduce_health(self, amount):
         """Reduce health by AMOUNT, and if the QueenAnt has no health
@@ -420,6 +453,9 @@ class QueenAnt(ThrowerAnt):
         # BEGIN Problem 12
         "*** YOUR CODE HERE ***"
         # END Problem 12
+        super().reduce_health(amount)
+        if self.health <= 0:
+            ants_lose()
 
 
 ################
