@@ -32,9 +32,9 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
     if scheme_symbolp(first) and first in scheme_forms.SPECIAL_FORMS:
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
-        # BEGIN PROBLEM 3
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM 3
+        procedure = scheme_eval(first, env)
+        args = rest.map(lambda operand: scheme_eval(operand, env))
+        return scheme_apply(procedure, args, env)
 
 def scheme_apply(procedure, args, env):
     """Apply Scheme PROCEDURE to argument values ARGS (a Scheme list) in
@@ -43,13 +43,24 @@ def scheme_apply(procedure, args, env):
     if not isinstance(env, Frame):
        assert False, "Not a Frame: {}".format(env)
     if isinstance(procedure, BuiltinProcedure):
-        # BEGIN PROBLEM 2
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM 2
+        curr =[]
+        def function (x):
+            if x==nil:
+                return
+            elif x.rest==nil :
+                curr.append(x.first)
+                return 
+            else:
+                curr.append(x.first)
+                function(x.rest)
+
+        function(args)
+
+        if procedure.need_env==True:
+            curr.append(env)
+                
         try:
-            # BEGIN PROBLEM 2
-            "*** YOUR CODE HERE ***"
-            # END PROBLEM 2
+            return procedure.py_func(*curr)
         except TypeError as err:
             raise SchemeError('incorrect number of arguments: {0}'.format(procedure))
     elif isinstance(procedure, LambdaProcedure):
@@ -78,9 +89,14 @@ def eval_all(expressions, env):
     >>> eval_all(read_line("((define x 2) x)"), create_global_frame())
     2
     """
-    # BEGIN PROBLEM 6
-    return scheme_eval(expressions.first, env) # replace this with lines of your own code
-    # END PROBLEM 6
+    if expressions is nil:
+            return None
+    result = None
+    while expressions is not nil:
+        result = scheme_eval(expressions.first, env)
+        expressions = expressions.rest
+    return result
+        
 
 
 ################################
