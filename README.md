@@ -7,5 +7,3 @@ It includes my code implementations for:
 - **Homeworks** 
 - **Projects** (Hog, Cats, Ants, Scheme)
 
-**Academic Integrity Warning:** 
-If you are currently taking CS 61A, please do not copy or refer to this code for your assignments. This repository is purely for my personal archive and portfolio purposes.
