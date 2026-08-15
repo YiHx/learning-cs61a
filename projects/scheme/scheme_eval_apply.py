@@ -64,13 +64,11 @@ def scheme_apply(procedure, args, env):
         except TypeError as err:
             raise SchemeError('incorrect number of arguments: {0}'.format(procedure))
     elif isinstance(procedure, LambdaProcedure):
-        # BEGIN PROBLEM 9
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM 9
+        new_env = procedure.env.make_child_frame(procedure.formals, args)
+        return eval_all(procedure.body, new_env)
     elif isinstance(procedure, MuProcedure):
-        # BEGIN PROBLEM 11
-        "*** YOUR CODE HERE ***"
-        # END PROBLEM 11
+       new_env = env.make_child_frame(procedure.formals, args)
+       return eval_all(procedure.body, new_env)
     else:
         assert False, "Unexpected procedure: {}".format(procedure)
 
